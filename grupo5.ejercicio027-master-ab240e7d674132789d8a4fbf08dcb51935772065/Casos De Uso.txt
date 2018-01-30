@@ -1,0 +1,29 @@
+Casos De Uso (Control De Permisos)
+
+	Historicos:
+
+		Guardar historico [X]
+	
+		Listar Historico [X]
+	
+	Usuarios:
+	
+		Añadir:
+
+			Añadir [X]
+			Modificar [X]
+			Eliminar (Al eliminar un Usuario que no se borre el Historico) [X]
+			Listar [X]
+
+		Habilitar/ Deshabilitar usuarios [ ]
+
+		Listar usuarios activos y desactivos [ ]
+
+
+Tareas Por Hacer:
+
+	Clase Validar
+	Habilitar / Deshabilitar Usuarios
+	Listar Activos, Inactivos
+
+	

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog 
+					http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+	<changeSet author="usuario (generated)" id="1400847488681-1">
+
+		<createTable catalogName="grupo1" tableName="TAREA">
+			<column autoIncrement="true" name="id" type="INT(10)">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="CODIGO" type="VARCHAR(45)" />
+			<column name="DESCRIPCION" type="VARCHAR(45)" />
+		</createTable>
+
+		<createTable catalogName="grupo1" tableName="VARIABLE_TEXTO">
+			<column autoIncrement="true" name="id" type="INT(10)">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="ID_TAREA" type="INT(10)" />
+			<column name="NOMBRE_VARIABLE_TEXTO" type="VARCHAR(45)" />
+			<column name="VALOR_VARIABLE_TEXTO" type="VARCHAR(45)" />
+		</createTable>
+
+		<createTable catalogName="grupo1" tableName="VARIABLE_NUMERO">
+			<column autoIncrement="true" name="id" type="INT(10)">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="ID_TAREA" type="INT(10)" />
+			<column name="NOMBRE_VARIABLE_NUMERO" type="VARCHAR(45)" />
+			<column name="VALOR_VARIABLE_NUMERO" type="DOUBLE(4)" />
+		</createTable>
+		<createTable catalogName="grupo1" tableName="EJECUCION">
+			<column autoIncrement="true" name="id" type="INT(10)">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="ID_TAREA" type="INT(10)" />
+			<column name="FECHA" type="VARCHAR(45)" />
+		</createTable>
+		<createTable catalogName="grupo1" tableName="REGISTRO">
+			<column autoIncrement="true" name="id" type="INT(10)">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="ID_EJECUCION" type="INT(10)" />
+			<column name="CAMPO" type="VARCHAR(45)" />
+			<column name="VALOR" type="VARCHAR(45)" />
+		</createTable>
+
+		<addForeignKeyConstraint constraintName="FK_VARIABLE_TEXTO_TAREA_ID"
+			referencedTableName="TAREA" baseColumnNames="ID_TAREA" baseTableName="VARIABLE_TEXTO"
+			referencedColumnNames="id" />
+			<addForeignKeyConstraint constraintName="FK_EJECUCION_TAREA_ID"
+			referencedTableName="TAREA" baseColumnNames="ID_TAREA" baseTableName="EJECUCION"
+			referencedColumnNames="id" />
+			<addForeignKeyConstraint constraintName="FK_REGISTRO_EJECUCION_ID"
+			referencedTableName="EJECUCION" baseColumnNames="ID_EJECUCION" baseTableName="REGISTRO"
+			referencedColumnNames="id" />
+
+		<addForeignKeyConstraint constraintName="FK_VARIABLE_NUMERO_TAREA_ID"
+			referencedTableName="TAREA" baseColumnNames="ID_TAREA" baseTableName="VARIABLE_NUMERO"
+			referencedColumnNames="id" />
+
+		<addUniqueConstraint catalogName="grupo1"
+			columnNames="CODIGO" constraintName="const_name" deferrable="true"
+			disabled="true" initiallyDeferred="true" tableName="TAREA" />
+	</changeSet>
+</databaseChangeLog>

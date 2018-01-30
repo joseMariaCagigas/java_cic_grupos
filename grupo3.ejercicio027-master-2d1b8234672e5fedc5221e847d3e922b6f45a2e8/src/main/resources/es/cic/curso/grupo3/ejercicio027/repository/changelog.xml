@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" 
+					xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+					xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog 
+					http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+					
+	<changeSet author="usuario (generated)" id="1400847488681-1">
+    
+		<createTable catalogName="grupo3" tableName="usuario_rol">
+			<column autoIncrement="true" name="id" type="INT(10)">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="nombre" type="VARCHAR(50)"/>
+		</createTable>
+        
+		<createTable catalogName="grupo3" tableName="evento_nivel">
+			<column autoIncrement="true" name="id" type="INT(10)">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="nombre" type="VARCHAR(50)"/>
+		</createTable>
+		
+		<createTable catalogName="grupo3" tableName="evento_tipo">
+			<column autoIncrement="true" name="id" type="INT(10)">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="nombre" type="VARCHAR(50)"/>
+		</createTable>
+		
+		<createTable catalogName="grupo3" tableName="evento_origen">
+			<column autoIncrement="true" name="id" type="INT(10)">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="nombre" type="VARCHAR(50)"/>
+			<column name="alta" type="BOOLEAN"/>
+		</createTable>
+		
+		<createTable catalogName="grupo3" tableName="usuario">
+			<column autoIncrement="true" name="id" type="INT(10)">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="nombre" type="VARCHAR(50)"/>
+			<column name="apellidos" type="VARCHAR(50)"/>
+			<column name="alta" type="BOOLEAN"/>
+			<column name="rol_id" type="INT(10)"/>
+		</createTable>
+		
+		<createTable catalogName="grupo3" tableName="evento">
+			<column autoIncrement="true" name="id" type="INT(10)">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="fecha" type="DATE"/>
+			<column name="hora" type="TIME"/>
+			<column name="descripcion" type="VARCHAR(100)"/>
+			<column name="alta" type="BOOLEAN"/>
+			<column name="origen_id" type="INT(10)"/>
+			<column name="usuario_id" type="INT(10)"/>
+			<column name="nivel_id" type="INT(10)"/>
+			<column name="tipo_id" type="INT(10)"/>
+		</createTable>
+    	 
+ 		<addForeignKeyConstraint 
+			constraintName="fk_usuario_rol_id" 
+			referencedTableName="usuario_rol" 
+			baseColumnNames="rol_id" 
+			baseTableName="usuario" 
+			referencedColumnNames="id"/>
+	</changeSet>
+   
+    <changeSet author="usuario (generated)" id="1400847488681-2">
+		<addForeignKeyConstraint 
+			constraintName="fk_evento_origen_id" 
+			referencedTableName="evento_origen" 
+			baseColumnNames="origen_id" 
+			baseTableName="evento" 
+			referencedColumnNames="id"/>
+	</changeSet>
+	
+	<changeSet author="usuario (generated)" id="1400847488681-3">
+		<addForeignKeyConstraint 
+			constraintName="fk_evento_usuario_id" 
+			referencedTableName="usuario" 
+			baseColumnNames="usuario_id" 
+			baseTableName="evento"
+			referencedColumnNames="id"/>
+	</changeSet>
+	
+	<changeSet author="usuario (generated)" id="1400847488681-4">
+		<addForeignKeyConstraint 
+			constraintName="fk_evento_nivel_id" 
+			referencedTableName="evento_nivel" 
+			baseColumnNames="nivel_id" 
+			baseTableName="evento" 
+			referencedColumnNames="id"/>
+	</changeSet>
+	
+	<changeSet author="usuario (generated)" id="1400847488681-5">
+		<addForeignKeyConstraint 
+			constraintName="fk_evento_tipo_id" 
+			referencedTableName="evento_tipo" 
+			baseColumnNames="tipo_id" 
+			baseTableName="evento" 
+			referencedColumnNames="id"/>
+	</changeSet>
+	
+<!-- 	<changeSet author="usuario (generated)" id="1400847488681-6">
+    	<sql>INSERT 
+    			INTO USUARIO_ROL (nombre) 
+    			VALUES 
+    				('Administrador'), 
+    				('Analista'), 
+    				('Desarrollador')
+    	</sql>
+	</changeSet>
+	
+	<changeSet author="usuario (generated)" id="1400847488681-7">
+		<sql>INSERT 
+				INTO EVENTO_NIVEL (nombre) 
+				VALUES 
+					('Bajo'), 
+					('Medio'), 
+					('Alto'), 
+					('Crítico'), 
+					('Bloqueante')
+		</sql>
+	</changeSet>
+    
+    <changeSet author="usuario (generated)" id="1400847488681-8">
+    	<sql>INSERT 
+    			INTO EVENTO_TIPO (nombre) 
+    			VALUES 
+    				('Información'), 
+    				('Aviso'), 
+    				('Error')
+    	</sql>
+	</changeSet>
+	
+	<changeSet author="usuario (generated)" id="1400847488681-9">
+    	<sql>INSERT 
+    			INTO EVENTO_ORIGEN (nombre) 
+    			VALUES 
+    				('Seguridad'), 
+    				('Recursos Humanos'), 
+    				('Administración')
+    	</sql>
+	</changeSet>
+	
+	<changeSet author="usuario (generated)" id="1400847488682-1">
+    	<sql>INSERT 
+    			INTO USUARIO (nombre, apellidos, alta, rol_id) 
+    			SELECT 'Pablo', 'Vega Perez', false, USUARIO_ROL.id
+    			FROM USUARIO_ROL
+    			WHERE USUARIO_ROL.nombre = 'Analista'
+    	</sql>
+	</changeSet>
+	
+	<changeSet author="usuario (generated)" id="1400847488682-2">
+    	<sql>INSERT 
+    			INTO USUARIO (nombre, apellidos, alta, rol_id) 
+    			SELECT 'Aitor', 'Ramos Sasselli', true, USUARIO_ROL.id
+    			FROM USUARIO_ROL
+    			WHERE USUARIO_ROL.nombre = 'Administrador'
+    	</sql>
+	</changeSet>
+	
+	<changeSet author="usuario (generated)" id="1400847488682-3">
+    	<sql>INSERT 
+    			INTO USUARIO (nombre, apellidos, alta, rol_id) 
+    			SELECT 'Luis', 'Barquín', true, USUARIO_ROL.id
+    			FROM USUARIO_ROL
+    			WHERE USUARIO_ROL.nombre = 'Desarrollador'
+    	</sql>
+	</changeSet>
+	
+	<changeSet author="usuario (generated)" id="1400847488682-4">
+    	<sql>INSERT 
+    			INTO EVENTO (fecha, hora, descripcion, alta, origen_id, usuario_id, nivel_id, tipo_id) 
+    			SELECT '2016-12-29', '21:00:28', 'Descripción del evento número 1', true, 
+    					EVENTO_ORIGEN.id, USUARIO.id, EVENTO_NIVEL.id, EVENTO_TIPO.id
+    			FROM EVENTO_ORIGEN, USUARIO, EVENTO_NIVEL, EVENTO_TIPO
+    			WHERE 
+    				EVENTO_ORIGEN.nombre = 'Seguridad' AND
+    				USUARIO.nombre = 'Pablo' AND
+    				EVENTO_NIVEL.nombre = 'Bloqueante' AND
+    				EVENTO_TIPO.nombre = 'Error'
+    	</sql>
+	</changeSet>
+	
+	<changeSet author="usuario (generated)" id="1400847488682-5">
+    	<sql>INSERT 
+    			INTO EVENTO (fecha, hora, descripcion, alta, origen_id, usuario_id, nivel_id, tipo_id) 
+    			SELECT '2017-01-06', '06:30:01', 'Descripción del evento número 2', true, 
+    					EVENTO_ORIGEN.id, USUARIO.id, EVENTO_NIVEL.id, EVENTO_TIPO.id
+    			FROM EVENTO_ORIGEN, USUARIO, EVENTO_NIVEL, EVENTO_TIPO
+    			WHERE 
+    				EVENTO_ORIGEN.nombre = 'Recursos Humanos' AND
+    				USUARIO.nombre = 'Aitor' AND
+    				EVENTO_NIVEL.nombre = 'Crítico' AND
+    				EVENTO_TIPO.nombre = 'Aviso'
+    	</sql>
+	</changeSet>
+	
+	<changeSet author="usuario (generated)" id="1400847488682-6">
+    	<sql>INSERT 
+    			INTO EVENTO (fecha, hora, descripcion, alta, origen_id, usuario_id, nivel_id, tipo_id) 
+    			SELECT '2017-02-23', '22:12:13', 'Descripción del evento número 3', true, 
+    					EVENTO_ORIGEN.id, USUARIO.id, EVENTO_NIVEL.id, EVENTO_TIPO.id
+    			FROM EVENTO_ORIGEN, USUARIO, EVENTO_NIVEL, EVENTO_TIPO
+    			WHERE 
+    				EVENTO_ORIGEN.nombre = 'Administración' AND
+    				USUARIO.nombre = 'Luis' AND
+    				EVENTO_NIVEL.nombre = 'Alto' AND
+    				EVENTO_TIPO.nombre = 'Información'
+    	</sql>
+	</changeSet> -->
+</databaseChangeLog>

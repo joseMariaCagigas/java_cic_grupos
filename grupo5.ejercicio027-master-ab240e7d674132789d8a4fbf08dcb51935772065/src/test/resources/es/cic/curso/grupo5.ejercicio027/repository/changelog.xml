@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog 
+			http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+    
+    <changeSet author="usuario (generated)" id="1400847488681-1">
+        
+        <createTable catalogName="grupo5" tableName="USUARIO">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="nombre" type="VARCHAR(50)" />
+            <column name="password" type="VARCHAR(50)" />
+            <column name="idrol" type="INT(50)" />
+            <column name="email" type="VARCHAR(50)" />
+            <column name="activo" type="BOOLEAN" />
+        </createTable>
+        
+        <createTable catalogName="grupo5" tableName="HISTORICO">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="operacion" type="VARCHAR(50)" />
+            <column name="hora" type="VARCHAR(50)" />
+            <column name="idusuario" type="INT(10)" />
+             <column name="permitido" type="BOOLEAN" />
+        </createTable>
+        
+         <createTable catalogName="grupo5" tableName="ROL">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="rol" type="VARCHAR(50)" />
+            
+           
+             </createTable>
+         <createTable catalogName="grupo5" tableName="OPERACION">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="descripcion" type="VARCHAR(50)" />
+            <column name="nombreRol" type="VARCHAR(50)" />
+            <column name="habilitada" type="BOOLEAN" />
+           
+        </createTable>
+        
+        
+        <addForeignKeyConstraint 
+            constraintName="fk_hitorico_idusuario" 
+            referencedTableName="USUARIO" 
+            baseColumnNames="idusuario" 
+            baseTableName="HISTORICO" 
+            referencedColumnNames="id"/>     
+        
+        <addForeignKeyConstraint 
+            constraintName="fk_usuario_idrol" 
+            referencedTableName="ROL" 
+            baseColumnNames="idrol" 
+            baseTableName="USUARIO" 
+            referencedColumnNames="id"/>
+   
+     
+    </changeSet>
+    
+</databaseChangeLog>

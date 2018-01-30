@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" 
+					xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+					xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog 
+					http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+    <changeSet author="usuario (generated)" id="1400847488681-1">
+     <createTable catalogName="grupo4" tableName="conector">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="tipo" type="VARCHAR(20)"/>
+            <column name="nombre" type="VARCHAR(20)"/>
+            <column name="descripcion" type="VARCHAR(100)"/>
+            <column name="origen" type="VARCHAR(100)"/>
+            <column name="destino" type="VARCHAR(100)"/>
+            <column name="habilitado" type="BOOLEAN"/>
+        </createTable>
+        
+        <createTable catalogName="grupo4" tableName="ejecucion">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="fecha" type="time"/>
+            <column name="correcta" type="BOOLEAN"/>
+            <column name="id_conector" type="INTEGER(10)">
+            	<constraints nullable="true"/>
+            </column>
+        </createTable>
+        
+        <createTable catalogName="grupo4" tableName="flujo">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="nombre" type="VARCHAR(20)"/>
+            <column name="conectores" type="VARCHAR(20)"/>
+             <column name="habilitado" type="BOOLEAN"/>
+        </createTable>
+        
+        <addForeignKeyConstraint 
+        			constraintName="fk_ejecucion_conector_id" 
+        			referencedTableName="conector" 
+        			baseColumnNames="id_conector" 
+        			baseTableName="ejecucion" 
+        			referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

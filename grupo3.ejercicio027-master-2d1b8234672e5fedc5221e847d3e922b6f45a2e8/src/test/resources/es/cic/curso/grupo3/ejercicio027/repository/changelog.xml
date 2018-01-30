@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" 
+					xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+					xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog 
+					http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+					
+	<changeSet author="usuario (generated)" id="1400847488681-1">
+    
+		<createTable catalogName="grupo3" tableName="usuario_rol">
+			<column autoIncrement="true" name="id" type="INT(10)">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="nombre" type="VARCHAR(50)"/>
+		</createTable>
+        
+		<createTable catalogName="grupo3" tableName="evento_nivel">
+			<column autoIncrement="true" name="id" type="INT(10)">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="nombre" type="VARCHAR(50)"/>
+		</createTable>
+		
+		<createTable catalogName="grupo3" tableName="evento_tipo">
+			<column autoIncrement="true" name="id" type="INT(10)">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="nombre" type="VARCHAR(50)"/>
+		</createTable>
+		
+		<createTable catalogName="grupo3" tableName="evento_origen">
+			<column autoIncrement="true" name="id" type="INT(10)">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="nombre" type="VARCHAR(50)"/>
+			<column name="alta" type="BOOLEAN"/>
+		</createTable>
+		
+		<createTable catalogName="grupo3" tableName="usuario">
+			<column autoIncrement="true" name="id" type="INT(10)">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="nombre" type="VARCHAR(50)"/>
+			<column name="apellidos" type="VARCHAR(50)"/>
+			<column name="alta" type="BOOLEAN"/>
+			<column name="rol_id" type="INT(10)"/>
+		</createTable>
+		
+		<createTable catalogName="grupo3" tableName="evento">
+			<column autoIncrement="true" name="id" type="INT(10)">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="fecha" type="DATE"/>
+			<column name="hora" type="TIME"/>
+			<column name="descripcion" type="VARCHAR(100)"/>
+			<column name="alta" type="BOOLEAN"/>
+			<column name="origen_id" type="INT(10)"/>
+			<column name="usuario_id" type="INT(10)"/>
+			<column name="nivel_id" type="INT(10)"/>
+			<column name="tipo_id" type="INT(10)"/>
+		</createTable>
+    	 
+ 		<addForeignKeyConstraint 
+			constraintName="fk_usuario_rol_id" 
+			referencedTableName="usuario_rol" 
+			baseColumnNames="rol_id" 
+			baseTableName="usuario" 
+			referencedColumnNames="id"/>
+	</changeSet>
+   
+    <changeSet author="usuario (generated)" id="1400847488681-2">
+		<addForeignKeyConstraint 
+			constraintName="fk_evento_origen_id" 
+			referencedTableName="evento_origen" 
+			baseColumnNames="origen_id" 
+			baseTableName="evento" 
+			referencedColumnNames="id"/>
+	</changeSet>
+	
+	<changeSet author="usuario (generated)" id="1400847488681-3">
+		<addForeignKeyConstraint 
+			constraintName="fk_evento_usuario_id" 
+			referencedTableName="usuario" 
+			baseColumnNames="usuario_id" 
+			baseTableName="evento"
+			referencedColumnNames="id"/>
+	</changeSet>
+	
+	<changeSet author="usuario (generated)" id="1400847488681-4">
+		<addForeignKeyConstraint 
+			constraintName="fk_evento_nivel_id" 
+			referencedTableName="evento_nivel" 
+			baseColumnNames="nivel_id" 
+			baseTableName="evento" 
+			referencedColumnNames="id"/>
+	</changeSet>
+	
+	<changeSet author="usuario (generated)" id="1400847488681-5">
+		<addForeignKeyConstraint 
+			constraintName="fk_evento_tipo_id" 
+			referencedTableName="evento_tipo" 
+			baseColumnNames="tipo_id" 
+			baseTableName="evento" 
+			referencedColumnNames="id"/>
+	</changeSet>
+</databaseChangeLog>
